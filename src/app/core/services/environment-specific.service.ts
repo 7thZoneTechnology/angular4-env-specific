@@ -11,6 +11,7 @@ import { EnvSpecific } from '../models/env-specific';
 export class EnvironmentSpecificService {
 
   public envSpecific: EnvSpecific;
+  public envSpecificNull: EnvSpecific = null;
   private envSpecificSubject: BehaviorSubject<EnvSpecific> = new BehaviorSubject<EnvSpecific>(null);
 
   constructor(private http: Http) {
@@ -18,12 +19,24 @@ export class EnvironmentSpecificService {
   }
 
   public loadEnvironment() {
-      return this.http.get('./assets/env-specific.json')
-          .map((data) => data.json())
-          .toPromise<EnvSpecific>();
+      // Only want to do this once - if root page is revisited, it calls this again.
+      if (this.envSpecific === null || this.envSpecific === undefined) {
+        console.log('Loading env-specific.json');
+
+        return this.http.get('./assets/env-specific.json')
+            .map((data) => data.json())
+            .toPromise<EnvSpecific>();
+      }
+
+      return Promise.resolve(this.envSpecificNull);
   }
 
   public setEnvSpecific(es: EnvSpecific) {
+    // This has already been set so bail out.
+    if (es === null || es === undefined) {
+        return;
+    }
+
     this.envSpecific = es;
     console.log(this.envSpecific);
 
@@ -32,6 +45,9 @@ export class EnvironmentSpecificService {
     }
   }
 
+  /*
+    Call this if you want to know when EnvSpecific is set.
+  */
   public subscribe(caller: any, callback: (caller: any, es: EnvSpecific) => void) {
       this.envSpecificSubject
           .subscribe((es) => {

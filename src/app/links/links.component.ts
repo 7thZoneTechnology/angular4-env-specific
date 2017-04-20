@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { EnvironmentSpecificService } from '../core/services/environment-specific.service';
 import { EnvSpecific } from '../core/models/env-specific';
 
 @Component({

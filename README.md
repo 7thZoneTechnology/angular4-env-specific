@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Angular4EnvSpecific
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
@@ -26,3 +27,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+=======
+# angular4-env-specific
+Angular 4 environment-specific info loaded using a json file so rebuilds in each environment are unnecessary.
+>>>>>>> refs/remotes/origin/master
